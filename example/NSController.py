@@ -25,132 +25,127 @@ class Controller:
         print(f'Using port: {ports[0]}')
         return ports[0]
 
-    def send(self, msg, duration=0.1):
-        if self.printout:
-            print(msg)
-        self.ser.write(f'{msg}\r\n'.encode('utf-8'));
-        sleep(duration)
-        self.ser.write(b'RELEASE\r\n');
-        sleep(self.buttondelay)
-
     def write(self,msg):
         self.ser.write(f'{msg}\r\n'.encode('utf-8'));
+
+    def release(self):
+        self.ser.write(b'RELEASE\r\n');
+
+    # negative or zero duration to hold the button
+    def send(self, msg, duration = 0.1):
+        if self.printout:
+            print(msg)
+        self.write(msg);
+        if duration > 0:
+            sleep(duration)
+            self.release();
+            sleep(self.buttondelay)
 
     def pause(self,duration):
         sleep(duration)
 
     def close(self):
+        self.release();
         sleep(0.5)
         self.ser.close()
         print('Connection closed!')
 
     # Botton
-    def A(self):
-        self.send('Button A')
+    def A(self,duration = 0.1):
+        self.send('Button A',duration)
 
-    def B(self):
-        self.send('Button B')
+    def B(self,duration = 0.1):
+        self.send('Button B',duration)
 
-    def X(self):
-        self.send('Button X')
+    def X(self,duration = 0.1):
+        self.send('Button X',duration)
 
-    def Y(self):
-        self.send('Button Y')
+    def Y(self,duration = 0.1):
+        self.send('Button Y',duration)
 
-    def L(self):
-        self.send('Button L')
+    def L(self,duration = 0.1):
+        self.send('Button L',duration)
 
-    def R(self):
-        self.send('Button R')
+    def R(self,duration = 0.1):
+        self.send('Button R',duration)
 
-    def ZL(self):
-        self.send('Button ZL')
+    def ZL(self,duration = 0.1):
+        self.send('Button ZL',duration)
 
-    def ZR(self):
-        self.send('Button ZR')
+    def ZR(self,duration = 0.1):
+        self.send('Button ZR',duration)
 
-    def p(self):
-        self.send('Button PLUS')
+    def p(self,duration = 0.1):
+        self.send('Button PLUS',duration)
 
-    def m(self):
-        self.send('Button MINUS')
+    def m(self,duration = 0.1):
+        self.send('Button MINUS',duration)
 
-    def h(self):
-        self.send('Button HOME')
+    def h(self,duration = 0.1):
+        self.send('Button HOME',duration)
 
-    def c(self):
-        self.send('Button CAPTURE')
+    def c(self,duration = 0.1):
+        self.send('Button CAPTURE',duration)
 
-    def l(self):
-        self.send('HAT LEFT')
+    # DPAD
+    def l(self,duration = 0.1):
+        self.send('HAT LEFT',duration)
 
-    def u(self):
-        self.send('HAT TOP')
+    def u(self,duration = 0.1):
+        self.send('HAT TOP',duration)
 
-    def r(self):
-        self.send('HAT RIGHT')
+    def r(self,duration = 0.1):
+        self.send('HAT RIGHT',duration)
 
-    def d(self):
-        self.send('HAT BOTTOM')
+    def d(self,duration = 0.1):
+        self.send('HAT BOTTOM',duration)
 
     # LEFT STICK
-    def ls_l(self,duration):
+    def ls_l(self,duration = 0.1):
         self.send('LX MIN',duration)
 
-    def ls_r(self,duration):
+    def ls_r(self,duration = 0.1):
         self.send('LX MAX',duration)
 
-    def ls_d(self,duration):
+    def ls_d(self,duration = 0.1):
         self.send('LY MAX',duration)
 
-    def ls_u(self,duration):
+    def ls_u(self,duration = 0.1):
         self.send('LY MIN',duration)
 
     # RIGHT STICK
-    def rs_l(self,duration):
+    def rs_l(self,duration = 0.1):
         self.send('RX MIN',duration)
 
-    def rs_r(self,duration):
+    def rs_r(self,duration = 0.1):
         self.send('RX MAX',duration)
 
-    def rs_d(self,duration):
+    def rs_d(self,duration = 0.1):
         self.send('RY MAX',duration)
 
-    def rs_u(self,duration):
+    def rs_u(self,duration = 0.1):
         self.send('RY MIN',duration)
 
-    # DPAD
-    def d_l(self,duration):
-        self.send('HAT LEFT',duration)
-
-    def d_r(self,duration):
-        self.send('HAT RIGHT',duration)
-
-    def d_d(self,duration):
-        self.send('HAT BOTTOM',duration)
-
-    def d_u(self,duration):
-        self.send('HAT TOP',duration)
-
-    # Multiple Keypressing
+    # Multiple Keypresses
     def LR(self,duration = 0.1):
-        self.write('Button L');
-        self.write('Button R');
-        sleep(duration)
-        self.ser.write(b'RELEASE\r\n');
-        sleep(self.buttondelay)
-
+        self.L(-1)
+        self.R(-1)
+        if duration > 0:
+            sleep(duration)
+            self.release();
+            sleep(self.buttondelay)
 
     # DPAD_UP + B + X
-    def AccessBackupSave(self):
-        self.write('HAT TOP');
-        self.write('Button B');
-        self.write('Button X');
-        sleep(0.1)
-        self.ser.write(b'RELEASE\r\n');
-        sleep(self.buttondelay)
+    def AccessBackupSave(self,duration = 0.1):
+        self.u(-1)
+        self.B(-1)
+        self.X(-1)
+        if duration > 0:
+            sleep(duration)
+            self.release();
+            sleep(self.buttondelay)
 
-    #Multi
+    # other functions
     def quit_app(self):
         self.h()
         sleep(0.5)

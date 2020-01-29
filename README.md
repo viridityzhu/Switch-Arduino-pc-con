@@ -1,7 +1,7 @@
 # Switch-Fightstick
-Forked from [ebith/Switch-Fightstick](https://github.com/ebith/Switch-Fightstick)
-Allow multiple keypressing
-Added python api
+Forked from [ebith/Switch-Fightstick](https://github.com/ebith/Switch-Fightstick)  
+Allow multiple keypressing  
+Added python api  
 
 ## Requirement
 - Arduino UNO R3
@@ -9,10 +9,10 @@ Added python api
 - USB cables
 
 ## Usage
-- Flash the Joystick.hex into Arduino
-- Connect adapter to Arduino as following:
-		VCC -> 5V
-		GND -> GND
-		RXD -> RX
-		TX -> TX
+- Flash Joystick.hex into Arduino
+- Connect adapter to Arduino as following:  
+		VCC -> 5V  
+		GND -> GND  
+		RXD -> RX  
+		TX -> TX  
 - PC/Mac -> Adapter -> Arduino [-> Switch Dock (optional)] -> Switch
