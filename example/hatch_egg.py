@@ -6,7 +6,7 @@ from NSController import Controller
 
 ctr = Controller()
 cycle = 20			# Egg cycle
-hatchingtime = -1	# Hatching time in second (18 to prevent freezing)
+hatchingtime = 18	# Hatching time in second (18 to prevent freezing)
 
 ## Prepare
 # ctr.quit_app()
