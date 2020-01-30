@@ -6,7 +6,20 @@ from NSController import Controller
 
 ctr = Controller()
 cycle = 20			# Egg cycle
-hatchingtime = 18	# Hatching time in second
+hatchingtime = -1	# Hatching time in second (18 to prevent freezing)
+
+## Prepare
+# ctr.quit_app()
+# ctr.pause(5)
+# ctr.enter_app()
+# ctr.pause(15)
+# ctr.A()
+# ctr.pause(10)
+# ctr.X()
+# ctr.pause(1)
+# ctr.d()
+# ctr.B()
+# ctr.pause(2)
 
 for i in range(6):
 	for j in range(5):
@@ -68,7 +81,7 @@ for i in range(6):
 		ctr.B()
 		ctr.pause(0.9)
 
-	# Put babys in the box
+	# Put babies in the box
 	ctr.buttondelay = 0.1
 	ctr.X()
 	ctr.pause(1)
