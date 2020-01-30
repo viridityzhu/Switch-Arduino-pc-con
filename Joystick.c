@@ -29,7 +29,7 @@ these buttons for our use.
 
 uint8_t target = RELEASE;
 uint16_t command;
-USB_JoystickReport_Input_t* last_report;
+USB_JoystickReport_Input_t last_report;
 
 void parseLine(char *line) {
 	char t[8];
@@ -78,8 +78,6 @@ void parseLine(char *line) {
 		command = SWITCH_HOME;
 	} else if (strcasecmp(c, "CAPTURE") == 0) {
 		command = SWITCH_CAPTURE;
-	} else if (strcasecmp(c, "RELEASE") == 0) {
-		command = SWITCH_RELEASE;
 	} else if (strcasecmp(c, "MIN") == 0) {
 		command = STICK_MIN;
 	} else if (strcasecmp(c, "MAX") == 0) {
@@ -109,6 +107,33 @@ void parseLine(char *line) {
 	} else {
 		target = RELEASE;
 	}
+
+	switch(target) {
+		// Allow single button release
+		case Button:
+			last_report.Button ^= command;
+			break;
+		// Overwrite conflict input
+		case LX:
+			last_report.LX = command;
+			break;
+		case LY:
+			last_report.LY = command;
+			break;
+		case RX:
+			last_report.RX = command;
+			break;
+		case RY:
+			last_report.RY = command;
+			break;
+		case HAT:
+			last_report.HAT = command;
+			break;
+		case RELEASE:
+		default:
+			EmptyReport();
+			break;
+	}
 }
 
 #define MAX_BUFFER 32
@@ -135,8 +160,6 @@ int main(void) {
   	sei();
   	UCSR1B |= (1 << RXCIE1);
 
-  	USB_JoystickReport_Input_t report;
-  	last_report = &report;
   	EmptyReport();
 	// We'll start by performing hardware and peripheral setup.
 	SetupHardware();
@@ -154,13 +177,12 @@ int main(void) {
 
 void EmptyReport(void)
 {
-	memset(last_report, 0, sizeof(USB_JoystickReport_Input_t));
-	last_report->Button = SWITCH_RELEASE;
- 	last_report->LX = STICK_CENTER;
-	last_report->LY = STICK_CENTER;
-	last_report->RX = STICK_CENTER;
- 	last_report->RY = STICK_CENTER;
- 	last_report->HAT = HAT_CENTER;
+	last_report.Button = SWITCH_RELEASE;
+ 	last_report.LX = STICK_CENTER;
+	last_report.LY = STICK_CENTER;
+	last_report.RX = STICK_CENTER;
+ 	last_report.RY = STICK_CENTER;
+ 	last_report.HAT = HAT_CENTER;
 }
 
 // Configures hardware and peripherals, such as the USB peripherals.
@@ -283,32 +305,6 @@ void HID_Task(void) {
 
 // Prepare the next report for the host.
 void GetNextReport(USB_JoystickReport_Input_t* const ReportData) {
-
-	switch(target) {
-		case Button:
-			last_report->Button |= command;
-			break;
-		case LX:
-			last_report->LX = command;
-			break;
-		case LY:
-			last_report->LY = command;
-			break;
-		case RX:
-			last_report->RX = command;
-			break;
-		case RY:
-			last_report->RY = command;
-			break;
-		case HAT:
-			last_report->HAT = command;
-			break;
-		case RELEASE:
-		default:
-			EmptyReport();
-			break;
-	}
-
-	memcpy(ReportData, last_report, sizeof(USB_JoystickReport_Input_t));
+	memcpy(ReportData, &last_report, sizeof(USB_JoystickReport_Input_t));
 }
 // vim: noexpandtab
