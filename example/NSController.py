@@ -9,7 +9,7 @@ class Controller:
             serial_port = Controller.find_port()
             print(f'Using port: {serial_port[0]}')
         self.ser = serial.Serial(serial_port[0], 9600)
-        self.buttondelay = 0.15
+        self.buttondelay = 0.1
         self.printout = printout
 
     @staticmethod

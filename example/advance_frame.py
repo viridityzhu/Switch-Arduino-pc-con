@@ -37,17 +37,17 @@ for i in range (3):
 	ctr.pause(0.2)
 	ctr.u()
 	ctr.A()
-	ctr.pause(1)
+	ctr.pause(1.1)
 	ctr.B()
-	ctr.pause(0.5)
+	ctr.pause(0.6)
 	ctr.A()
 	ctr.pause(4.5)
 
 	# collect Watts
 	ctr.A()
-	ctr.pause(0.1)
+	ctr.pause(0.5)
 	ctr.A()
-	ctr.pause(0.1)
+	ctr.pause(0.5)
 	ctr.A()
 	ctr.pause(2)
 
