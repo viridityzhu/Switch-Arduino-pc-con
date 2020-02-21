@@ -1,4 +1,4 @@
-from NSController import Controller
+from NXController import Controller
 
 ctr = Controller()
 N = 30	# Number of Pokemon in the box

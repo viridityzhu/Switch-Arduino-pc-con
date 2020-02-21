@@ -1,4 +1,4 @@
-from NSController import Controller
+from NXController import Controller
 
 ctr = Controller()
 

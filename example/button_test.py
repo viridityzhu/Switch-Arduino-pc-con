@@ -1,4 +1,4 @@
-from NSController import Controller
+from NXController import Controller
 
 ctr = Controller()
 ## Or use your serial port if you have many

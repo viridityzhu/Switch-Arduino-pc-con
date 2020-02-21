@@ -1,4 +1,4 @@
-from NSController import Controller
+from NXController import Controller
 
 # last pokemon box should be a empty box, the target/last map destination should be the Day Care in Wild Area
 # last X menu item should be "Map", egg should be ready to pick
