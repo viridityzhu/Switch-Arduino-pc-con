@@ -5,7 +5,7 @@ from NXController import Controller
 # Text speed fast. No animation.
 
 cycle = 20			# Egg cycles
-hatchingtime = 12	# Unfreeze the game before fly, egg hatching time in seconds. 18 is safest
+hatchingtime = 10	# Unfreeze the game before fly, egg hatching time in seconds. 18 is safest
 slot = 1			# The first party slot to be replaced (1~5)
 N = 30				# Number of eggs to receive
 
@@ -22,7 +22,7 @@ for i in range(N):
 	ctr.A()
 	ctr.pause(0.5)
 	ctr.A()
-	ctr.pause(4)
+	ctr.pause(3)
 
 	# Go back to Day Care
 	ctr.ls_d(0.7)
@@ -37,9 +37,9 @@ for i in range(N):
 	ctr.A()
 	ctr.pause(2)
 	ctr.A()
-	ctr.pause(1.5)
+	ctr.pause(1.3)
 	ctr.A()
-	ctr.pause(2.2)
+	ctr.pause(2.1)
 	for jj in range(slot):
 		ctr.d()
 		ctr.pause(0.1)
@@ -48,7 +48,6 @@ for i in range(N):
 	ctr.A()
 	ctr.pause(1.5)
 	ctr.A()
-	ctr.pause(0.2)
 
 	# Move forward
 	ctr.ls_u(3)
