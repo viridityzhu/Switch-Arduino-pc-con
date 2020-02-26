@@ -1,26 +1,33 @@
 from NXController import Controller
 
 ctr = Controller()
-N = 30	# Number of Pokemon in the box
+N = 90	# Number of Pokemon
 
-for i in range(N):
-	print(f'{i+1}/{N}')
+for ii in range(N):
+	print(f'{ii+1}/{N} released')
 	ctr.A()
 	ctr.pause(0.1)
 	ctr.u()
 	ctr.u()
 	ctr.A()
-	ctr.pause(1)
+	ctr.pause(0.7)
 	ctr.u()
 	ctr.A()
 	ctr.pause(1.3)
 	ctr.A()
-	ctr.pause(0.1)
+
+	# Move to next
 	ctr.r()
-	ctr.pause(0.1)
+
 	# Change row
-	if i % 6 == 5:
+	if ii % 6 == 5:
 		ctr.r()
+		ctr.d()
+
+	# Change boxs
+	if ii % 30 == 29:
+		ctr.R()
+		ctr.d()
 		ctr.d()
 
 ctr.close()
