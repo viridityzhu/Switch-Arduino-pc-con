@@ -3,9 +3,13 @@ from NXController import Controller
 ctr = Controller()
 ## Or use your serial port if you have many
 # ctr = Controller('/dev/tty.usbserial-AO0099VT');
+ctr.LS()
+# Advance raid seed FrameCycle times
+FrameCycle = 5
+ReturntoStartDate = True
+N = FrameCycle + 1 if ReturntoStartDate else FrameCycle
 
-# Advance raid seed 3 times
-for i in range (3):
+for ii in range (N):
 	# enter the raid
 	ctr.A()
 	ctr.pause(2)
@@ -14,12 +18,12 @@ for i in range (3):
 	ctr.h()
 	ctr.pause(1)
 	ctr.d()
-	for i in range(4):
+	for jj in range(4):
 		ctr.r()
 	ctr.A()
 	ctr.d(2)
 	ctr.r()
-	for i in range(4):
+	for jj in range(4):
 		ctr.d()
 	ctr.A()
 
@@ -28,7 +32,11 @@ for i in range (3):
 	ctr.A()
 	ctr.r()
 	ctr.r()
-	ctr.u()
+	if ii < FrameCycle:
+		ctr.u()
+	else:
+		for jj in range(FrameCycle):
+			ctr.d()
 	ctr.r(0.4)
 	ctr.A()
 
@@ -44,10 +52,13 @@ for i in range (3):
 	ctr.pause(4.5)
 
 	# collect Watts
-	ctr.A()
-	ctr.pause(0.5)
-	ctr.A()
-	ctr.pause(0.5)
+	if ii < FrameCycle:
+		ctr.A()
+		ctr.pause(0.5)
+		ctr.A()
+		ctr.pause(0.5)
+
+	# Check den
 	ctr.A()
 	ctr.pause(2)
 
