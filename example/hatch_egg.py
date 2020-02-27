@@ -5,9 +5,9 @@ from NXController import Controller
 # Text speed fast. No animation.
 
 cycle = 20			# Egg cycles
-hatchingtime = 10	# Unfreeze the game before fly, egg hatching time in seconds. 18 is safest
+hatchingtime = 9	# Unfreeze the game before fly, egg hatching time in seconds. 18 is safest
 slot = 1			# The first party slot to be replaced (1~5)
-N = 30				# Number of eggs to receive
+N = 210				# Number of eggs to receive
 
 ctr = Controller()
 ctr.LS()
@@ -22,12 +22,12 @@ for i in range(N):
 	ctr.A()
 	ctr.pause(0.5)
 	ctr.A()
-	ctr.pause(3)
+	ctr.pause(2.8)
 
 	# Go back to Day Care
 	ctr.ls_d(0.7)
 	ctr.ls_r(0.2)
-	ctr.pause(0.5)
+	ctr.pause(0.2)
 
 	print(f"Picking {i + 1}th egg(s)")
 	ctr.A()
@@ -50,15 +50,15 @@ for i in range(N):
 	ctr.A()
 
 	# Move forward
-	ctr.ls_u(3)
-	ctr.ls_r(2)
+	ctr.ls_u(2)
+	ctr.ls_r(1)
 
 	for c in range(cycle):
-		ctr.ls_d(0.5)
 		ctr.B()
-		ctr.ls_r(0.5)
-		ctr.ls_u(0.6)
+		ctr.ls_r(0.6)
+		ctr.ls_d(0.5)
 		ctr.ls_l(0.5)
+		ctr.ls_u(0.5)
 
 	for cnt in range(hatchingtime):
 		ctr.B()
