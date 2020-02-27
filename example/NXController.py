@@ -159,6 +159,16 @@ class Controller:
         self.A()
         self.A()
 
+    def sleepmode(self):
+        self.h()
+        sleep(0.5)
+        self.d()
+        self.r(0.7)
+        self.A()
+        sleep(0.5)
+        self.A()
+        print('Switch entering sleep mode')
+
     # Key combinations
     # L + R (Example 1)
     def LR(self,duration = 0.1):

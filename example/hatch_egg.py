@@ -66,4 +66,7 @@ for i in range(N):
 
 	slot = 1 if slot == 5 else slot + 1
 
+if N >= 30:
+	ctr.sleepmode()
+
 ctr.close()
