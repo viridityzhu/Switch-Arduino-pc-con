@@ -1,7 +1,6 @@
 from NXController import Controller
 
-# last X menu item is "Map", egg is ready to pick
-# Full party lead with flame body, on your bike
+# Full party lead with flame body, on your bike, egg is ready to pick
 # Text speed fast. No animation.
 
 cycle = 20			# Egg cycles
@@ -17,6 +16,9 @@ for i in range(N):
 	# Fly to Day Care in Wild Area
 	ctr.X()
 	ctr.pause(1)
+	if i == 0: # Select map
+		ctr.ls_d(0.5)
+		ctr.ls_l(0.7)
 	ctr.A()
 	ctr.pause(2.5)
 	ctr.A()
