@@ -48,7 +48,7 @@ def findinlist(hsl):
 	return -1
 
 # Find all colors
-Colorlist= numpy.array([[0,0,0]])
+Colorlist = numpy.empty((0,3),int)
 for r in range(h):
 	if not hsv_array[r,:,3].any():
 		continue
@@ -63,7 +63,7 @@ for r in range(h):
 			hsv_array[r,c,4] = len(Colorlist) - 1
 		else:
 			hsv_array[r,c,4] = idx
-if len(Colorlist) > 15
+if len(Colorlist) > 15:
 	print("Too many colors")
 
 def ResetCanvas():
@@ -77,7 +77,6 @@ def ResetCanvas():
 	ctr.A() # Clear Canvas
 
 	ctr.X()
-	ctr.L() # Black
 	ctr.u()
 	ctr.u()
 	ctr.u()
@@ -93,14 +92,15 @@ def SetPalette():
 	ctr.r()
 	ctr.A()
 	ctr.pause(0.5)
-	for ii in range(1,len(Colorlist)):
-		ctr.L()
-		ctr.l(2)
-		ctr.d()
-		ctr.l(2)
-		ctr.d()
-		ctr.l(2)
-		ctr.d()
+	for ii in range(len(Colorlist)):
+		if ii > 0:
+			ctr.L()
+			ctr.l(2)
+			ctr.d()
+			ctr.l(2)
+			ctr.d()
+			ctr.l(2)
+			ctr.d()
 		C = Colorlist[ii]
 		for V in C:
 			for jj in range(V):
@@ -109,7 +109,7 @@ def SetPalette():
 	ctr.A()
 	ctr.pause(0.5)
 	ctr.B()
-	for ii in range(len(Colorlist) - 1):
+	for ii in range(1,len(Colorlist)):
 		ctr.R()
 
 def MoveToNextPixel(direction):
